@@ -17,11 +17,13 @@ def test_login(home_page_login):
 #4. Click the login button to proceed to the logged-in state.
 def test_load_login(home_page_login):
     data = load_data()
+    home_page_login.navigate_to(data["url"])
     home_page_login.login(data["username"], data["password"])  #Replace with the user credentials from login.json file
 
 #5. Check that there is a loaded user number on the dashboard (the content needs to be present but could be a changing value)
 def test_dashboard(home_page_login):
     data = load_data()
+    home_page_login.navigate_to(data["url"])
     user = data["username"][:5]
     email = data["username"]
     home_page_login.check_dashboard(user,email)

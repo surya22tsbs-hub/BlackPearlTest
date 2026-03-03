@@ -3,7 +3,8 @@ from playwright.sync_api import expect
 
 class HomePage(BasePage):
     # Locators
-    LINK = 'xpath=//*[@id="switch-up"]'
+    #LINK = 'xpath=//*[@id="switch-up"]'
+    LINK = '(//*[contains(text(),"username and password")])[1]'
     USERNAME = 'xpath=//*[@id="LoginForm-Username"]'
     PASSWORD = 'xpath=//*[@id="LoginForm-Password"]'
     LOGIN_BUTTON = 'xpath=//*[@id="blackpearlLogin"]/span'
