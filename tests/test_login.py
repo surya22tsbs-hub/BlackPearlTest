@@ -24,6 +24,8 @@ def test_load_login(home_page_login):
 def test_dashboard(home_page_login):
     data = load_data()
     home_page_login.navigate_to(data["url"])
+    home_page_login.login(data["username"], data["password"])
     user = data["username"][:5]
+    user = user.capitalize()
     email = data["username"]
     home_page_login.check_dashboard(user,email)

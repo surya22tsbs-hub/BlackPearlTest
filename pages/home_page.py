@@ -1,5 +1,6 @@
 from pages.base_page import BasePage
 from playwright.sync_api import expect
+import time
 
 class HomePage(BasePage):
     # Locators
@@ -10,17 +11,20 @@ class HomePage(BasePage):
     LOGIN_BUTTON = 'xpath=//*[@id="blackpearlLogin"]/span'
     USER = 'xpath=//*[contains(text(),"Welcome {}")]'
     USER_EMAIL = 'xpath=//*[@id="ui-member-email"]'
-    USER_EMAIL_NAME = 'xpath=//*[contains(text(),"{}")]'
+    USER_EMAIL_NAME = 'xpath=(//*[contains(text(),"{}")])[1]'
 
     def login(self, username, password):
+        self.page.screenshot(path="Link.png") 
         self.click(self.LINK)
         self.input_text(self.USERNAME, username)
         self.input_text(self.PASSWORD, password)
         self.click(self.LOGIN_BUTTON)
+        time.sleep(5)   # Sleep time given for page to load after login
+        self.page.screenshot(path="Login.png")
 
     def check_dashboard(self,user,email):
         name = self.USER.format(user)
         expect(self.page.locator(name)).to_be_visible()
         expect(self.page.locator(self.USER_EMAIL)).to_be_visible()
-        email = self.USER.format(email)
+        email = self.USER_EMAIL_NAME.format(email)
         expect(self.page.locator(email)).to_be_visible()
